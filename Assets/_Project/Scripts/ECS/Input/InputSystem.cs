@@ -25,10 +25,14 @@ public sealed class InputSystem : UpdateSystem
     {
         foreach (Entity entity in _filter)
         {
+            ref InputComponent input = ref entity.GetComponent<InputComponent>();
+
             _input.x = Input.GetAxisRaw(Horizontal);
             _input.y = Input.GetAxisRaw(Vertical);
-            entity.GetComponent<InputComponent>().Input = _input;
-            entity.GetComponent<InputComponent>().MousePosition = Input.mousePosition;
+            bool LMBPressed = Input.GetMouseButton(0);
+            input.Input = _input;
+            input.MousePosition = Input.mousePosition;
+            input.IsLeftMouseButtonPressed = LMBPressed;
         }
     }
 }

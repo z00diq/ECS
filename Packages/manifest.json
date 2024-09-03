@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.codewriter.morpeh.events": "https://github.com/codewriter-packages/Morpeh.Events.git",
     "com.codewriter.triinspector": "file:E:/Загрузки/Tri-Inspector-main/Tri-Inspector-main",
     "com.scellecs.morpeh": "file:E:/Загрузки/morpeh-main/morpeh-main",
     "com.unity.collab-proxy": "2.4.4",

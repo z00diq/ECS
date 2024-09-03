@@ -3,6 +3,7 @@ using UnityEngine;
 using Unity.IL2CPP.CompilerServices;
 using Scellecs.Morpeh;
 using Assets._Project.Scripts.Extentions;
+using Assets._Project.Scripts.ECS.Shooting;
 
 [Il2CppSetOption(Option.NullChecks, false)]
 [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
@@ -20,7 +21,9 @@ public sealed class InputProviderSystem : UpdateSystem
         _filter = World.Filter.With<InputComponent>().
             With<MoveComponent>().
             With<RotationComponent>().
-            With<TransformComponent>().Build();
+            With<TransformComponent>().
+            With<ShootComponent>().
+            Build();
 
         _camera = Camera.main;
     }
@@ -33,16 +36,18 @@ public sealed class InputProviderSystem : UpdateSystem
             ref InputComponent input = ref entity.GetComponent<InputComponent>();
             ref RotationComponent rotate = ref entity.GetComponent<RotationComponent>();
             ref TransformComponent transform = ref entity.GetComponent<TransformComponent>();
+            ref ShootComponent shoot = ref entity.GetComponent<ShootComponent>();
+
 
             Ray ray = _camera.ScreenPointToRay(input.MousePosition);
 
             if (Physics.Raycast(ray, out RaycastHit hit))
                 rotate.ToRotate = hit.point;
 
-            //move.Direction.z = transform.Transform.forward.z * input.Input.y;
-            //move.Direction.x = transform.Transform.right.x * input.Input.x;
+            shoot.IsFireing = input.IsLeftMouseButtonPressed;
+            
             Vector3 direction = transform.Transform.forward * input.Input.y + transform.Transform.right * input.Input.x;
-            move.Direction = direction;
+            move.Direction = direction.normalized;
         }
     }
 }

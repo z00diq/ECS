@@ -9,5 +9,6 @@ using Unity.IL2CPP.CompilerServices;
 public struct InputComponent : IComponent 
 {
     public Vector2 Input;
+    public bool IsLeftMouseButtonPressed;
     public Vector3 MousePosition;
 }

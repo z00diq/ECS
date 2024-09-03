@@ -23,9 +23,6 @@ public sealed class MoveSystem : UpdateSystem
             ref MoveComponent move = ref entity.GetComponent<MoveComponent>();
             Vector3 newPosition = deltaTime * move.Speed * move.Direction;
 
-            if ((move.Position + newPosition - move.Position).magnitude < 0.1f)
-                continue;
-
             move.Position += newPosition;
         }
     }
