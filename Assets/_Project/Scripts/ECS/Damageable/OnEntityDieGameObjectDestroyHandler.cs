@@ -8,9 +8,8 @@ using System.Threading.Tasks;
 
 namespace Assets._Project.Scripts.ECS.Enemy
 {
-    public sealed class EnemyProvider : MonoProvider<EnemyMarker>
+    public sealed class OnEntityDieGameObjectDestroyHandler : EntityProvider
     {
-
         private void Update()
         {
             if (Entity.IsDisposed())

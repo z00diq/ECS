@@ -2,8 +2,8 @@ using Scellecs.Morpeh.Systems;
 using UnityEngine;
 using Unity.IL2CPP.CompilerServices;
 using Scellecs.Morpeh;
-using Assets._Project.Scripts.Extentions;
 using Assets._Project.Scripts.ECS.Shooting;
+using Assets._Project.Scripts.ECS.Camera;
 
 [Il2CppSetOption(Option.NullChecks, false)]
 [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
@@ -11,10 +11,8 @@ using Assets._Project.Scripts.ECS.Shooting;
 [CreateAssetMenu(menuName = "ECS/Systems/" + nameof(InputProviderSystem))]
 public sealed class InputProviderSystem : UpdateSystem
 {
-    private Camera _camera;
+    private Filter _cameraFilter;
     private Filter _filter;
-    private Vector3 _reflectedInput;
-    private Vector3 _rotatatePosition;
 
     public override void OnAwake() 
     {
@@ -25,11 +23,16 @@ public sealed class InputProviderSystem : UpdateSystem
             With<ShootComponent>().
             Build();
 
-        _camera = Camera.main;
+        _cameraFilter = World.Filter.With<CameraComponent>().Build();
     }
 
     public override void OnUpdate(float deltaTime) 
     {
+        Entity cameraEntity = _cameraFilter.FirstOrDefault();
+
+        if (cameraEntity == null)
+            return;
+
         foreach (Entity entity in _filter)
         {
             ref MoveComponent move = ref entity.GetComponent<MoveComponent>();
@@ -38,8 +41,10 @@ public sealed class InputProviderSystem : UpdateSystem
             ref TransformComponent transform = ref entity.GetComponent<TransformComponent>();
             ref ShootComponent shoot = ref entity.GetComponent<ShootComponent>();
 
+            Camera camera = cameraEntity.GetComponent<CameraComponent>().Camera;
 
-            Ray ray = _camera.ScreenPointToRay(input.MousePosition);
+
+            Ray ray = camera.ScreenPointToRay(input.MousePosition);
 
             if (Physics.Raycast(ray, out RaycastHit hit))
                 rotate.ToRotate = hit.point;

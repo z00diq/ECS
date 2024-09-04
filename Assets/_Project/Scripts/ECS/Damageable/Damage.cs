@@ -9,9 +9,6 @@ namespace Assets._Project.Scripts.ECS.Damageable
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public struct Damage : IComponent
     {
-        public bool IsReadyAttack;
-        public float RealoadTime;
-        public float EllapsedTime;
         public int Value;
     }
 }

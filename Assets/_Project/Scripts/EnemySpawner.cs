@@ -34,16 +34,14 @@ namespace Assets._Project.Scripts
                 return;
 
             Vector3 spawnPosition = GetRandomPosition();
-            GameObject enemyView = GameObject.Instantiate(_config.Prefab, spawnPosition, Quaternion.identity);
-            Entity enemy = enemyView.AddComponent<EnemyProvider>().Entity;
+            TransformProvider enemyView = Object.Instantiate(_config.Prefab, spawnPosition, Quaternion.identity);
+            Entity enemy = enemyView.Entity;
 
             enemy.SetComponent(new MoveComponent { Speed = _config.Speed, Position = enemyView.transform.position });
-            enemy.SetComponent(new Damage { Value = _config.Damage, RealoadTime = _config.RealoadTime,IsReadyAttack = true,});
-            enemy.SetComponent(new TransformComponent { Transform = enemyView.transform });
+            enemy.SetComponent(new Attack { Damage = _config.Damage, RealoadTime = _config.RealoadTime,IsReadyAttack = true,});
             enemy.SetComponent(new FollowComponent { Target = _player, TargetOffset = _targerOffset });
             enemy.SetComponent(new HealthComponent { Value = _config.Health });
-            enemy.SetComponent(new Damagable());
-
+            
             _ellapsedTime = 0;
         }
 

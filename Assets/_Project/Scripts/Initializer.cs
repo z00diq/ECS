@@ -17,13 +17,22 @@ namespace Assets._Project.Scripts
 
         private void Start()
         {
+            World world = World.Default;
+
             PlayerSpawner playerSpawner = new PlayerSpawner(_playerConfig, _spawnPoint.position);
             Entity player = playerSpawner.Create();
             Transform playerView = player.GetComponent<TransformComponent>().Transform;
             _enemySpawner = new EnemySpawner(_enemyConfig,  player, _spawnConfig);
             Entity camera = _cameraProvider.Entity;
-            camera.SetComponent(new TransformComponent { Transform = _cameraProvider.gameObject.transform });
             camera.SetComponent(new FollowComponent { Target = playerView });
+
+            //SystemsGroup systemGroup = world.CreateSystemsGroup();
+            //InputSystem inputSystem = new();
+            //InputProviderSystem inputProviderSystem = new();
+            //FollowSystem followSystem = new();
+            //MoveSystem moveSystem = new();
+
+            //systemGroup.AddSystem(InputSystem);
 
         }
 

@@ -14,23 +14,14 @@ namespace Assets._Project.Scripts.ECS.Camera
     [CreateAssetMenu(menuName = "ECS/Systems/" + nameof(CameraFollowSystem))]
     public class CameraFollowSystem : LateUpdateSystem
     {
-        private Vector3 _offset;
         private Filter _filter;
 
         public override void OnAwake()
         {
             _filter = World.Filter.With<FollowComponent>().
-                With<CameraMarker>().
+                With<CameraComponent>().
                 With<TransformComponent>().
                 Build();
-
-            Entity camera = _filter.First();
-
-            Transform self = camera.GetComponent<TransformComponent>().Transform;
-            Transform target = camera.GetComponent<FollowComponent>().Target;
-
-            _offset = target.position - self.position;
-
         }
 
         public override void OnUpdate(float deltaTime)
@@ -39,8 +30,9 @@ namespace Assets._Project.Scripts.ECS.Camera
             {
                 Transform self = entity.GetComponent<TransformComponent>().Transform;
                 Transform target = entity.GetComponent<FollowComponent>().Target;
+                Vector3 offset = entity.GetComponent<CameraComponent>().Offset;
 
-                self.transform.position = target.position - _offset;
+                self.transform.position = Vector3.MoveTowards(self.transform.position, target.position - offset, 0.015f);
             }
         }
     }

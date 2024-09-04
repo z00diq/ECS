@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Player Config
   m_EditorClassIdentifier: 
   _speed: 6
-  _prefab: {fileID: 9043873255832982662, guid: 44c7e9a5a344f7e4ab11ea11f9e250d2, type: 3}
+  _prefab: {fileID: 7626087345793303868, guid: 44c7e9a5a344f7e4ab11ea11f9e250d2, type: 3}
   _health: 100

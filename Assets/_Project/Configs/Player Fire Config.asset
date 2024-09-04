@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8817cf706320e084ba7cbc582b93f4b6, type: 3}
   m_Name: Player Fire Config
   m_EditorClassIdentifier: 
-  _prefab: {fileID: 253203712685321671, guid: afba87c159489224a84d09d3e2c86faa, type: 3}
+  _prefab: {fileID: 7951961604162369854, guid: afba87c159489224a84d09d3e2c86faa, type: 3}
   _fireRate: 3
   _speed: 15
   _damage: 100

@@ -2,10 +2,7 @@
 using Scellecs.Morpeh.Systems;
 using UnityEngine;
 using Scellecs.Morpeh;
-using System;
 using Assets._Project.Scripts.ECS.Damageable;
-using Unity.VisualScripting;
-using Scellecs.Morpeh.Providers;
 
 namespace Assets._Project.Scripts.ECS.Shooting
 {
@@ -36,22 +33,22 @@ namespace Assets._Project.Scripts.ECS.Shooting
                 if (shoot.IsFireing == false)
                     continue;
 
-                SpawnBullet(shoot);
+                SpawnShot(shoot);
 
                 shoot.EllapsedTime = 0;
             }
         }
 
-        private void SpawnBullet(ShootComponent shoot)
+        private void SpawnShot(ShootComponent shoot)
         {
-            FireBallProvider bulletView =Instantiate(shoot.Config.Prefab, shoot.SpawnPosition.position, Quaternion.identity);
-            bulletView.AddComponent<RemoveEntityOnDestroy>();
-            Entity bullet = bulletView.Entity;
-            bullet.SetComponent(new TransformComponent { Transform = bulletView.transform });
-            bullet.SetComponent(new Damage { IsReadyAttack = true, Value = shoot.Config.Damage});
-            bullet.SetComponent(new MoveComponent 
+            TransformProvider shotView = Object.Instantiate(shoot.Config.Prefab, shoot.SpawnPosition.position, Quaternion.identity);
+            Entity shot = shotView.Entity;
+
+            Debug.Log("EntityIdFire" + shot.ID);
+            shot.SetComponent(new Attack { IsReadyAttack = true, Damage = shoot.Config.Damage});
+            shot.SetComponent(new MoveComponent 
             { 
-                Position = bulletView.transform.position, 
+                Position = shotView.transform.position, 
                 Direction = shoot.SpawnPosition.forward, 
                 Speed = shoot.Config.Speed 
             });

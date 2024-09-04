@@ -321,6 +321,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 543d480088c8117429f3837e7bddcda9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializedData:
+    Camera: {fileID: 963194227}
+    Offset: {x: -6, y: -12, z: 3}
 --- !u!1 &1057136700
 GameObject:
   m_ObjectHideFlags: 0
@@ -550,8 +553,8 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 963194228}
-  - {fileID: 705507995}
   - {fileID: 1889447634}
   - {fileID: 2117914270}
+  - {fileID: 963194228}
+  - {fileID: 705507995}
   - {fileID: 1057136704}

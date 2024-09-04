@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Assets._Project.Scripts.ECS.Camera
 {
-    public class CameraProvider: MonoProvider<CameraMarker>
+    public class CameraProvider: MonoProvider<CameraComponent>
     {
             
     }

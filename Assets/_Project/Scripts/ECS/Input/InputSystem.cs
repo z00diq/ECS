@@ -13,8 +13,6 @@ public sealed class InputSystem : UpdateSystem
     private const string Vertical = nameof(Vertical);
 
     private Filter _filter;
-    private Vector2 _input;
-    private Vector3 _mousePosition;
 
     public override void OnAwake() 
     {
@@ -23,14 +21,16 @@ public sealed class InputSystem : UpdateSystem
 
     public override void OnUpdate(float deltaTime) 
     {
+        Vector2 inputVector = new();
+         
         foreach (Entity entity in _filter)
         {
             ref InputComponent input = ref entity.GetComponent<InputComponent>();
 
-            _input.x = Input.GetAxisRaw(Horizontal);
-            _input.y = Input.GetAxisRaw(Vertical);
+            inputVector.x = Input.GetAxisRaw(Horizontal);
+            inputVector.y = Input.GetAxisRaw(Vertical);
             bool LMBPressed = Input.GetMouseButton(0);
-            input.Input = _input;
+            input.Input = inputVector;
             input.MousePosition = Input.mousePosition;
             input.IsLeftMouseButtonPressed = LMBPressed;
         }

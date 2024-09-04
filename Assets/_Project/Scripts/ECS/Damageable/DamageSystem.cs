@@ -17,7 +17,7 @@ namespace Assets._Project.Scripts.ECS.Damageable
         public override void OnAwake()
         {
             _filter = World.Filter.With<HealthComponent>().
-                With<Damagable>().Build();
+                With<Damage>().Build();
         }
 
         public override void OnUpdate(float deltaTime)
@@ -25,13 +25,13 @@ namespace Assets._Project.Scripts.ECS.Damageable
             foreach (Entity entity in _filter)
             {
                 ref HealthComponent health = ref entity.GetComponent<HealthComponent>();
-                ref Damagable damagable = ref entity.GetComponent<Damagable>();
+                ref Damage damage = ref entity.GetComponent<Damage>();
 
-                if (damagable.Value == 0)
+                if (damage.Value == 0)
                     continue;
 
-                health.Value -= damagable.Value;
-                damagable.Value = 0;
+                health.Value =  Mathf.Max( health.Value - damage.Value,0);
+                entity.RemoveComponent<Damage>();
 
                 if (health.Value <= 0)
                     entity.Dispose();

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Enemy Config
   m_EditorClassIdentifier: 
   _speed: 3
-  _prefab: {fileID: 6517276650226595266, guid: 8b15d4ab137253b4f81295b58b1d30ad, type: 3}
+  _prefab: {fileID: 1093732421706403579, guid: 8b15d4ab137253b4f81295b58b1d30ad, type: 3}
   _health: 100
   _damage: 50
   _reloadTime: 5

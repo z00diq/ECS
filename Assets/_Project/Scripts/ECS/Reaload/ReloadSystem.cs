@@ -15,24 +15,24 @@ namespace Assets._Project.Scripts.ECS.Reaload
         private Filter _filter;
         public override void OnAwake()
         {
-            _filter = World.Filter.With<Damage>().Build();
+            _filter = World.Filter.With<Attack>().Build();
         }
 
         public override void OnUpdate(float deltaTime)
         {
             foreach (Entity entity in _filter)
             {
-                ref Damage damage = ref entity.GetComponent<Damage>();
+                ref Attack attack = ref entity.GetComponent<Attack>();
 
-                if (damage.IsReadyAttack)
+                if (attack.IsReadyAttack)
                     continue;
 
-                damage.EllapsedTime += deltaTime;
+                attack.EllapsedTime += deltaTime;
 
-                if (damage.EllapsedTime >= damage.RealoadTime)
+                if (attack.EllapsedTime >= attack.RealoadTime)
                 {
-                    damage.IsReadyAttack = true;
-                    damage.EllapsedTime = 0;
+                    attack.IsReadyAttack = true;
+                    attack.EllapsedTime = 0;
                 }
             }
         }
