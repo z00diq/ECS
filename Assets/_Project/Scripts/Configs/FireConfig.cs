@@ -3,6 +3,7 @@
 [CreateAssetMenu(fileName = "Player Fire Config", menuName = "Configs/Player/Fire")]
 public class FireConfig : ScriptableObject
 {
+    [SerializeField] public float LifeTime;
     [SerializeField] private TransformProvider _prefab;
     [SerializeField] private float _fireRate;
     [SerializeField] private float _speed;

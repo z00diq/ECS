@@ -1,14 +1,15 @@
 ﻿using Scellecs.Morpeh;
 using Unity.IL2CPP.CompilerServices;
 
-namespace Assets._Project.Scripts.ECS.Health
+namespace Assets._Project.Scripts.ECS.OnTimerDestroy
 {
     [System.Serializable]
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public struct HealthComponent: IComponent
+    public struct Destroyable : IComponent
     {
-        public int Value;
+        public float LifeTime;
+        public float EllapsedTime;
     }
 }

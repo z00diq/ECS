@@ -32,7 +32,7 @@ namespace Assets._Project.Scripts.ECS.Camera
                 Transform target = entity.GetComponent<FollowComponent>().Target;
                 Vector3 offset = entity.GetComponent<CameraComponent>().Offset;
 
-                self.transform.position = Vector3.MoveTowards(self.transform.position, target.position - offset, 0.015f);
+                self.transform.position = Vector3.MoveTowards(self.transform.position, target.position - offset, 0.5f);
             }
         }
     }
