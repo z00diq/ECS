@@ -1,9 +1,8 @@
-﻿using Assets._Project.Scripts.ECS.Damageable;
-using Assets._Project.Scripts.ECS.Followable;
+﻿using Assets._Project.Scripts.ECS.Followable;
 using Assets._Project.Scripts.ECS.Health;
-using Assets._Project.Scripts.ECS.Enemy;
 using Scellecs.Morpeh;
 using UnityEngine;
+using AttackComponent = Assets._Project.Scripts.ECS.Attack.Attack;
 
 namespace Assets._Project.Scripts
 {
@@ -38,7 +37,7 @@ namespace Assets._Project.Scripts
             Entity enemy = enemyView.Entity;
 
             enemy.SetComponent(new MoveComponent { Speed = _config.Speed, Position = enemyView.transform.position });
-            enemy.SetComponent(new Attack { Damage = _config.Damage, RealoadTime = _config.RealoadTime,IsReadyAttack = true,});
+            enemy.SetComponent(new AttackComponent { Damage = _config.Damage, RealoadTime = _config.RealoadTime,IsReadyToAttack = true});
             enemy.SetComponent(new FollowComponent { Target = _player, TargetOffset = _targerOffset });
             enemy.SetComponent(new HealthComponent { Value = _config.Health });
             

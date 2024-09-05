@@ -3,7 +3,8 @@ using Scellecs.Morpeh;
 using Scellecs.Morpeh.Systems;
 using Unity.IL2CPP.CompilerServices;
 using UnityEngine;
-
+using Assets._Project.Scripts.ECS.Attack;
+using AttackComponent = Assets._Project.Scripts.ECS.Attack.Attack;
 namespace Assets._Project.Scripts.ECS.Reaload
 {
     [Il2CppSetOption(Option.NullChecks, false)]
@@ -15,23 +16,23 @@ namespace Assets._Project.Scripts.ECS.Reaload
         private Filter _filter;
         public override void OnAwake()
         {
-            _filter = World.Filter.With<Attack>().Build();
+            _filter = World.Filter.With<AttackComponent>().Build();
         }
 
         public override void OnUpdate(float deltaTime)
         {
             foreach (Entity entity in _filter)
             {
-                ref Attack attack = ref entity.GetComponent<Attack>();
+                ref AttackComponent attack = ref entity.GetComponent<AttackComponent>();
 
-                if (attack.IsReadyAttack)
+                if (attack.IsReadyToAttack)
                     continue;
 
                 attack.EllapsedTime += deltaTime;
 
                 if (attack.EllapsedTime >= attack.RealoadTime)
                 {
-                    attack.IsReadyAttack = true;
+                    attack.IsReadyToAttack = true;
                     attack.EllapsedTime = 0;
                 }
             }

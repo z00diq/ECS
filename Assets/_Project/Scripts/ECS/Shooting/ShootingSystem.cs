@@ -2,8 +2,8 @@
 using Scellecs.Morpeh.Systems;
 using UnityEngine;
 using Scellecs.Morpeh;
-using Assets._Project.Scripts.ECS.Damageable;
 using Assets._Project.Scripts.ECS.OnTimerDestroy;
+using AttackComponent =  Assets._Project.Scripts.ECS.Attack.Attack;
 
 namespace Assets._Project.Scripts.ECS.Shooting
 {
@@ -45,8 +45,7 @@ namespace Assets._Project.Scripts.ECS.Shooting
             TransformProvider shotView = Object.Instantiate(shoot.Config.Prefab, shoot.SpawnPosition.position, Quaternion.identity);
             Entity shot = shotView.Entity;
 
-            Debug.Log("EntityIdFire" + shot.ID);
-            shot.SetComponent(new Attack { IsReadyAttack = true, Damage = shoot.Config.Damage});
+            shot.SetComponent(new AttackComponent { IsReadyToAttack = true, Damage = shoot.Config.Damage});
             shot.SetComponent(new Destroyable { LifeTime = shoot.Config.LifeTime });
             shot.SetComponent(new MoveComponent 
             { 

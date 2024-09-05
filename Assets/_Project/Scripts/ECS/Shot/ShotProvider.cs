@@ -5,22 +5,19 @@ using Assets._Project.Scripts.ECS.Shot;
 using Scellecs.Morpeh;
 using Scellecs.Morpeh.Providers;
 using UnityEngine;
-
+using AttackComponent = Assets._Project.Scripts.ECS.Attack.Attack;
 public class ShotProvider : MonoProvider<ShotComponent>
 {
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out EnemyProvider entityProvider))
         {
-            ref HealthComponent health = ref entityProvider.Entity.GetComponent<HealthComponent>(out bool exist);
-
-            ref Attack attack = ref Entity.GetComponent<Attack>();
-
-            if (exist == false)
+            if (entityProvider.Entity.Has<HealthComponent>() == false)
                 return;
 
-            entityProvider.Entity.SetComponent(new Damage { Value = attack.Damage });
-            Entity.Dispose();
+            ref AttackComponent attack = ref Entity.GetComponent<AttackComponent>();
+
+            attack.Target = entityProvider.Entity;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Assets._Project.Scripts.ECS.Camera;
+﻿using Assets._Project.Scripts.ECS.Attack;
+using Assets._Project.Scripts.ECS.Camera;
 using Assets._Project.Scripts.ECS.Damageable;
 using Assets._Project.Scripts.ECS.Followable;
 using Assets._Project.Scripts.ECS.OnTimerDestroy;
@@ -47,6 +48,7 @@ namespace Assets._Project.Scripts
             systemGroup.AddSystem(new MoveSystem());
             systemGroup.AddSystem(new RotationSystem());
             systemGroup.AddSystem(new ShootingSystem());
+            systemGroup.AddSystem(new AttackSystem());
             systemGroup.AddSystem(new ReloadSystem());
             systemGroup.AddSystem(new DamageSystem());
             systemGroup.AddSystem(new DestroySystem());

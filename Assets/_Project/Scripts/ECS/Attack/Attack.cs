@@ -1,7 +1,7 @@
 ﻿using Scellecs.Morpeh;
 using Unity.IL2CPP.CompilerServices;
 
-namespace Assets._Project.Scripts.ECS.Damageable
+namespace Assets._Project.Scripts.ECS.Attack
 {
     [System.Serializable]
     [Il2CppSetOption(Option.NullChecks, false)]
@@ -9,7 +9,8 @@ namespace Assets._Project.Scripts.ECS.Damageable
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public struct Attack : IComponent
     {
-        public bool IsReadyAttack;
+        public Entity Target;
+        public bool IsReadyToAttack;
         public float RealoadTime;
         public float EllapsedTime;
         public int Damage;
